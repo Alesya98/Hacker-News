@@ -26,7 +26,8 @@
 
 1. **Клонируйте репозиторий:**
 
-  git clone https://github.com/Alesya98/Hacker-News. 
+  git clone https://github.com/Alesya98/Hacker-News
+   
   cd HACKER-NEWS
 
 2. **Установите зависимости:**
