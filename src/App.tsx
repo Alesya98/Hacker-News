@@ -1,13 +1,16 @@
 
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import { HomePage } from './pages/HomePage'
+import { NewsPage } from './pages/NewsPage'
 
 function App() {
-  
 
   return (
-    <div>
-      <p>Hello, World</p>
-    </div>
+    <Routes>
+      <Route path='/' element={<HomePage />}/>
+      <Route path='/news/:id' element={<NewsPage/>}/>
+    </Routes>
   )
 }
 
