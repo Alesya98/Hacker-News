@@ -29,7 +29,7 @@ export const NewsPage = () => {
     }, [dispatch, id])
 
     useEffect(() => {
-        dispatch(textComments(info?.kids))
+        dispatch(textComments(info?.kids ?? []))
     }, [dispatch, info?.kids])
 
     const handleClick = () => {
@@ -37,7 +37,7 @@ export const NewsPage = () => {
     }
 
     const handleClickUpdate = () => {
-       dispatch(textComments(info?.kids))
+       dispatch(textComments(info?.kids ?? []))
     }
     
         const antIcon = (
@@ -76,28 +76,28 @@ export const NewsPage = () => {
                                 <Link href={info?.url} target="_blank">
                                 <LinkOutlined />    Открыть новость</Link>
                                 <Title level={2} style={{marginBottom: 16, fontWeight: 600, fontSize: '26px', color:'#8A2BE2'}}>
-                                    {info?.title}
+                                    {info?.title ?? undefined}
                                 </Title>
                                 
                                 <Space size="large">
                                     <Text >
-                                        <ClockCircleOutlined />  {formatTime(info?.time)}
+                                        <ClockCircleOutlined />  {formatTime(info?.time ?? 0)}
                                     </Text>
 
                                     <Text>
                                         <UserOutlined/> {info?.by || 'anonymous'}
                                     </Text>
 
-                                    {info?.kids.length > 0 && (
+                                    {(info?.kids?.length ?? 0)> 0 && (
                                     <Text type="secondary" style={{ fontSize:  13}}>
-                                    <MessageOutlined/>{info?.kids.length}
+                                    <MessageOutlined/>{info?.kids?.length}
                                         </Text>
                                     )}
                                  </Space>
                             </Card>
                             
                               <>
-                                 {comment.length === 0 ? (<p style={{fontSize:'26px', color:'#FFFFFF'}}>Комментарии отсутствуют</p>) : (
+                                 {comment?.length === 0 ? (<p style={{fontSize:'26px', color:'#FFFFFF'}}>Комментарии отсутствуют</p>) : (
                                     comment?.map((item) => (
                                 <CommentItem key={item.id} comment={item} />
                                  ))
