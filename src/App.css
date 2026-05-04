@@ -1,12 +1,16 @@
 .btn-date {
-    border-radius: 12px;
-    margin-bottom: 34px;
-    padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 34px;
+  padding: 20px;
 }
 
 .new__card {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ant-card {
+  flex: 1;
 }
