@@ -1,8 +1,8 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/hooks";
 import { useEffect } from "react";
 import { textComments } from "../API/newsAPI";
-import { selectComment, selectLoading, selectNews } from "../redux/newsReducer";
+import { selectComment, selectLoading } from "../redux/newsReducer";
 import { Button, Layout, Spin, Typography } from "antd";
 import {
   ArrowLeftOutlined,
@@ -16,28 +16,25 @@ const { Content } = Layout;
 const { Title } = Typography;
 
 export const NewsPage = () => {
-  const { id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
-  const info = useAppSelector(selectNews);
   const loading = useAppSelector(selectLoading);
   const comment = useAppSelector(selectComment);
   const navigate = useNavigate();
-
-  const newsCard = info?.find((item) => item.id === Number(id));
+  const { state } = useLocation();
 
   useEffect(() => {
-    if (newsCard?.kids?.length) {
-      dispatch(textComments(newsCard.kids));
+    if (state?.kids?.length) {
+      dispatch(textComments(state.kids));
     }
-  }, [dispatch, newsCard?.kids]);
+  }, [dispatch, state?.kids]);
 
   const handleClick = () => {
     navigate("/");
   };
 
   const handleClickUpdate = () => {
-    if (newsCard?.kids?.length) {
-      dispatch(textComments(newsCard.kids));
+    if (state?.kids?.length) {
+      dispatch(textComments(state.kids));
     }
   };
 

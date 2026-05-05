@@ -18,7 +18,7 @@ export const NewsCard = ({ cardInfo }: CardProps) => {
   const navigate = useNavigate();
 
   const handeleClick = () => {
-    navigate(`/news/${cardInfo.id}`);
+    navigate(`/news/${cardInfo.id}`, { state: cardInfo });
   };
 
   return (

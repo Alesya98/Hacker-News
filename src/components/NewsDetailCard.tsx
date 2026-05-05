@@ -6,17 +6,12 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { formatTime } from "../utils/formatTime";
-import { useAppSelector } from "../hooks/hooks";
-import { selectNews } from "../redux/newsReducer";
-import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const { Title, Text, Link } = Typography;
 
 export const NewsDetailCard = () => {
-  const { id } = useParams<{ id: string }>();
-  const info = useAppSelector(selectNews);
-
-  const newsCard = info?.find((item) => item.id === Number(id));
+  const { state } = useLocation();
 
   return (
     <Card
@@ -29,7 +24,7 @@ export const NewsDetailCard = () => {
         background: "rgba(255, 255, 255, 0.85)",
       }}
     >
-      <Link href={newsCard?.url} target="_blank">
+      <Link href={state?.url} target="_blank">
         <LinkOutlined /> Открыть новость
       </Link>
       <Title
@@ -41,22 +36,22 @@ export const NewsDetailCard = () => {
           color: "#8A2BE2",
         }}
       >
-        {newsCard?.title ?? undefined}
+        {state?.title ?? undefined}
       </Title>
 
       <Space size="large">
         <Text>
-          <ClockCircleOutlined /> {formatTime(newsCard?.time ?? 0)}
+          <ClockCircleOutlined /> {formatTime(state?.time ?? 0)}
         </Text>
 
         <Text>
-          <UserOutlined /> {newsCard?.by || "anonymous"}
+          <UserOutlined /> {state?.by || "anonymous"}
         </Text>
 
-        {(newsCard?.kids?.length ?? 0) > 0 && (
+        {(state?.kids?.length ?? 0) > 0 && (
           <Text type="secondary" style={{ fontSize: 13 }}>
             <MessageOutlined />
-            {newsCard?.kids?.length}
+            {state?.kids?.length}
           </Text>
         )}
       </Space>
