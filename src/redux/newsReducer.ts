@@ -1,12 +1,16 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import { getNews, kidsComments, textComments } from "../API/newsAPI";
+import {
+  // getAboutNew,
+  getNews,
+  kidsComments,
+  textComments,
+} from "../API/newsAPI";
 import type { NewsType } from "../types/news";
 
 export type RequestStatusType = "idle" | "loading" | "succeeded" | "failed";
 
 type NewsState = {
   data: NewsType[] | null;
-  currentNews: NewsType | null;
   comment: NewsType[] | null;
   status: string;
   error: string | null;
@@ -15,7 +19,6 @@ type NewsState = {
 
 const initialState: NewsState = {
   data: [],
-  currentNews: null,
   comment: [],
   status: "idle",
   error: null,
@@ -64,16 +67,10 @@ const newsReducer = createSlice({
     selectNews: (state) => state.data,
     selectLoading: (state) => state.status,
     selectError: (state) => state.error,
-    selectNew: (state) => state.currentNews,
     selectComment: (state) => state.comment,
   },
 });
 
 export default newsReducer.reducer;
-export const {
-  selectNews,
-  selectLoading,
-  selectError,
-  selectNew,
-  selectComment,
-} = newsReducer.selectors;
+export const { selectNews, selectLoading, selectError, selectComment } =
+  newsReducer.selectors;
