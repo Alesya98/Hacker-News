@@ -14,9 +14,7 @@ export const CommentItem = ({ comment }: CommentsListProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const dispatch = useAppDispatch();
 
-  const handleClick = async (e: React.MouseEvent) => {
-    // e.preventDefault();
-    // e.stopPropagation();
+  const handleClick = async () => {
     if (!isVisible && comment.kids && comment.kids.length > 0) {
       try {
         const result = await dispatch(kidsComments(comment.kids)).unwrap();
